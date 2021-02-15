@@ -1,0 +1,217 @@
+<head>
+<title>This is jsoup test page</title>
+<style type="text/css">
+        @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+        * {
+            font-family: 'Nanum Gothic', sans-serif;
+        }
+    </style>
+<script src="http://chimmuktest.esy.es/jquery-1.10.2.min.js"></script>
+<style>
+        body{
+            padding:20px 20px;
+        }
+        .results tr[visible='false'],
+        .no-result{
+            display:none;
+        }
+        .results tr[visible='true']{
+            display:table-row;
+        }
+        .counter{
+            padding:8px;
+            color:#ccc;
+        }
+    </style>
+<script>
+        $(document).ready(function() {
+            $(".search").keyup(function () {
+                var searchTerm = $(".search").val();
+                var listItem = $('.results tbody').children('tr');
+                var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+                $.extend($.expr[':'], {'containsi': function(elem, i, match, array){
+                    return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+                }
+                });
+                $(".results tbody tr").not(":containsi('" + searchSplit + "')").each(function(e){
+                    $(this).attr('visible','false');
+                });
+                $(".results tbody tr:containsi('" + searchSplit + "')").each(function(e){
+                    $(this).attr('visible','true');
+                });
+                var jobCount = $('.results tbody tr[visible="true"]').length;
+                $('.counter').text(jobCount + ' item');
+                if(jobCount == '0') {
+                    $('.no-result').show();
+                } else {
+                    $('.no-result').hide();
+                }
+            });
+        });
+    </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="section">
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<ul class="nav nav-pills">
+<li class="active">
+<a href="#">HOME</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="section text-left">
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<h1 class="text-primary">
+<bold>Jsoup test page with bootstrap</bold>
+</h1>
+<p>This page is jsoup test page
+                    <br/>Double clicks this page table, you can look professor information</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section">
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="form-group pull-right" draggable="true">
+<input class="search form-control" placeholder="Search words" type="text"/>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12 text-left">
+<table class="results table table-bordered table-condensed table-hover table-striped" id="ltable" style="cursor:pointer">
+<thead>
+<tr>
+<td>#</td>
+<th>Professers</th>
+<th>Lecture names</th>
+<th class="hidden-xs">orther</th>
+<th class="hidden-xs">Grades</th>
+<th>Evaluation</th>
+<th class="hidden-lg hidden-md hidden-sm hidden-xs">Teaching method</th>
+<th class="hidden-lg hidden-md hidden-sm hidden-xs">About exam</th>
+</tr>
+<tr class="warning no-result">
+<td colspan="6">
+<i class="fa fa-error text-danger">No thing...plz search again</i>
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="number">1</td>
+<td class="professor">John</td>
+<td class="lecture">C language</td>
+<td class="orther hidden-xs">Anything</td>
+<td class="grade hidden-xs">2</td>
+<td class="evaluation">1P</td>
+<td class="method hidden-lg hidden-md hidden-sm hidden-xs">lecturehowthis lecutre is very simple, and easy, so i do not know advanced c launage.. lecturehow</td>
+<td class="aboutexam hidden-lg hidden-md hidden-sm hidden-xs">test middle exam is very very easy, and professor teaches exam problem, and writes it..newif you have advance c ability, you can get A+ grade. this is so easy.test</td>
+</tr>
+<tr>
+<td class="number">2</td>
+<td class="professor">Kim</td>
+<td class="lecture">JAVA</td>
+<td class="orther hidden-xs">Anything</td>
+<td class="grade hidden-xs">3</td>
+<td class="evaluation">2.5P</td>
+<td class="method hidden-lg hidden-md hidden-sm hidden-xs">lecturehowBook do not use, but professor want to buy book.. and he teach our in PPT files..newHe speak very very slient.. newLecture is very borning... and very sleepinglecturehow</td>
+<td class="aboutexam hidden-lg hidden-md hidden-sm hidden-xs">testprofessor is very kind but problem is very diffcult.test</td></tr>
+<tr>
+<td class="number">3</td>
+<td class="professor">Gun</td>
+<td class="lecture">PHP / pythion</td>
+<td class="orther hidden-xs">Anthing</td>
+<td class="grade hidden-xs">1</td>
+<td class="evaluation">5P</td>
+<td class="method hidden-lg hidden-md hidden-sm hidden-xs">lecturehowWhen love is in excess it brings a man no honor nor worthiness.lecturehow</td>
+<td class="aboutexam hidden-lg hidden-md hidden-sm hidden-xs">testpass fail Doing a thing well is often a waste of time.test</td></tr>
+<tr>
+<td class="number">4</td>
+<td class="professor">Hun</td>
+<td class="lecture">Soccer</td>
+<td class="orther hidden-xs">Special</td>
+<td class="grade hidden-xs">2</td>
+<td class="evaluation">5P</td>
+<td class="method hidden-lg hidden-md hidden-sm hidden-xs">lecturehowWe thought we were running away from the grown-ups, and now we are the grown-upsnewWe cannot always build the future for our youth, but we can build our youth for the future.newlecturehow</td>
+<td class="aboutexam hidden-lg hidden-md hidden-sm hidden-xs">testDestiny is no matter of chance. It is a matter of choice. It is not a thing to be waited for, it is a thing to be achieved.newA wise man will make more opportunities than he finds.test</td></tr>
+<tr>
+<td class="number">5</td>
+<td class="professor">Coner</td>
+<td class="lecture">Smart Car</td>
+<td class="orther hidden-xs">Special</td>
+<td class="grade hidden-xs">1</td>
+<td class="evaluation">4P</td>
+<td class="method hidden-lg hidden-md hidden-sm hidden-xs">lecturehowNow, I say to you today my friends, even though we face the difficulties of today and tomorrow, I still have a dream. It is a dream deeply rooted in the American dream. I have a dream that one day this nation will rise up and live out the true meaning of its creed: - 'We hold these truths to be self-evident, that all men are created equal.newpass faillecturehow</td>
+<td class="aboutexam hidden-lg hidden-md hidden-sm hidden-xs">testChallenges are gifts that force us to search for a new center of gravity. Don't fight them. Just find a different way to stand.test</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<script>
+            var insistid =0;
+            $('#ltable > tbody > tr').dblclick(function () {
+                var intext=$(this).text();
+                var intext2=$(this).text();
+                var result = intext.split("\n");
+                var result2 = intext.split("lecturehow");
+                var result3 = intext.split("test");
+                insistid = result[0]; // 의견달기 구분자
+                var proname = "Professor : "+result[1]+"<br>";
+                var lecturename = "Lecture name : "+result[2]+"<br>";
+                var division = "orther : "+result[3]+"<br>";
+                var grade = "Grade : "+result[4]+"<br>";
+                var ev = "Lecture Evaluation(x/5) : "+result[5]+"<br>";
+                var how = "<br><p class=\"text-primary\">Teaching method : <br></p>"+result2[1]+"<br>";
+                var test = "<br><p class=\"text-primary\">About exam : <br></p>"+result3[1]+"<br>";
+                temp=proname+lecturename+division+grade+ev+how.replace(/new/gi, "<br>")+test.replace(/new/gi, "<br>");
+                var temp2=result[2]+ "(" +result[1]+") detail information"
+                document.getElementById("intext").innerHTML=temp;
+                document.getElementById("inhead").innerHTML=temp2;
+                location.href="#inform";
+            });
+        </script>
+<div class="row">
+<div class="col-md-12">
+<p class="text-danger">If you double clicks this table, you look detail lecture information.
+                </p>
+</div>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<hr/>
+</div>
+</div>
+</div>
+</body>
+<div id="inform">
+<div class="section">
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<h1 class="text-primary" id="inhead">Detail lecture inforamtion</h1>
+<p id="intext" name="intext">You can double clicks this table</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
